@@ -1,0 +1,55 @@
+CREATE DATABASE candidate_db;
+
+USE candidate_db;
+
+CREATE TABLE candidates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    degree VARCHAR(255),
+    specialization VARCHAR(255),
+    phone_number VARCHAR(20),
+    linkedin_profile VARCHAR(255),
+    github_profile VARCHAR(255)
+);
+
+CREATE TABLE certifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_id INT,
+    certification_name VARCHAR(255),
+    FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+);
+
+CREATE TABLE internship_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_id INT,
+    internship_detail VARCHAR(255),
+    FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+);
+
+CREATE TABLE courses_completed (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_id INT,
+    course_name VARCHAR(255),
+    FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+);
+
+CREATE TABLE programming_languages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_id INT,
+    language_name VARCHAR(255),
+    FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+);
+
+CREATE TABLE e_certificates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_id INT,
+    e_certificate_name VARCHAR(255),
+    FOREIGN KEY (candidate_id) REFERENCES candidates(id)
+);
+
+INSERT INTO candidates (name, email, degree, specialization, phone_number, linkedin_profile, github_profile)
+VALUES ('John Doe', 'john.doe@example.com', 'B.Sc', 'Computer Science', '123-456-7890', 'https://linkedin.com/in/johndoe', 'https://github.com/johndoe');
+
+INSERT INTO certifications (candidate_id, certification_name)
+VALUES (LAST_INSERT_ID(), 'AWS Certified Solutions Architect');
